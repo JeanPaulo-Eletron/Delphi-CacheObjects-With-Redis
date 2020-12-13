@@ -7,10 +7,12 @@ uses Classes, SysUtils, UObjectFile;
 type
   TClientes = class
   private
-    FNome: String;
+    FNome:  String;
+    FIdade: String;
   public
     //[JSONMarshalled(True)] [JSonName('NomeField')]
-    property Nome: String read FNome write FNome;
+    property Nome:  String read FNome  write FNome;
+    property Idade: String read FIdade write FIdade;
   end;
 
 implementation
