@@ -1,0 +1,117 @@
+unit UClientes;
+
+interface
+
+uses Classes, SysUtils, UObjectFile;
+
+type
+  TClientes = class(TPersistent)
+  private
+    FFileName: String;
+  public
+    nome : string;
+//    constructor Create(POwner: TComponent);
+//    destructor Destroy; override;
+//    procedure LoadFromTextFile(const aFileName: TFileName);
+//    procedure SaveToTextFile(const PFileName: TFileName);
+//    procedure SaveText;
+//    function ToString: String;
+//    procedure FromString(const aTextualRepresentation: String);
+  end;
+
+implementation
+
+{ TClientes }
+
+//{$HINTS OFF}
+//procedure TClientes.FromString(const aTextualRepresentation: String);
+//var
+//  BinStream: TMemoryStream;
+//  StrStream: TStringStream;
+//begin
+//  StrStream := TStringStream.Create(aTextualRepresentation);
+//  try
+//    BinStream := TMemoryStream.Create;
+//    try
+//      StrStream.Seek(0, sofrombeginning);
+//      ObjectTextToBinary(StrStream, BinStream);
+//      BinStream.Seek(0, sofrombeginning);
+//      Self := BinStream.ReadComponent(Self) as TClientes;
+//    finally
+//      BinStream.Free
+//    end;
+//  finally
+//    StrStream.Free;
+//  end;
+//end;
+//{$HINTS ON}
+//
+//procedure TClientes.SaveText;
+//begin
+//  if FFileName <> '' then
+//    SaveToTextFile(FFileName);
+//end;
+//
+//procedure TClientes.SaveToTextFile(const PFileName: TFileName);
+//begin
+//  with TStringList.Create do
+//    try
+//      Text := Self.ToString;
+//      SaveToFile(PFileName);
+//    finally
+//      Free;
+//    end;
+//end;
+//
+//constructor TClientes.Create(POwner: TComponent);
+//begin
+//  inherited;
+//  FFileName := '';
+//end;
+//
+//destructor TClientes.Destroy;
+//begin
+//  SaveText;
+//
+//  inherited;
+//end;
+//
+//procedure TClientes.LoadFromTextFile(const aFileName: TFileName);
+//begin
+//  FFileName := aFileName;
+//
+//  if FileExists(FFileName) then
+//    with TStringList.Create do
+//      try
+//        LoadFromFile(FFileName);
+//        FromString(Text);
+//      finally
+//        Free;
+//      end;
+//end;
+//
+//function TClientes.ToString: String;
+//var
+//  BinStream: TMemoryStream;
+//  StrStream: TStringStream;
+//  S: string;
+//begin
+//  inherited;
+//  BinStream := TMemoryStream.Create;
+//  try
+//    StrStream := TStringStream.Create(S);
+//    try
+//      BinStream.WriteComponent(Self as TClientes);
+//      BinStream.Seek(0, sofrombeginning);
+//      ObjectBinaryToText(BinStream, StrStream);
+//      StrStream.Seek(0, sofrombeginning);
+//      Result := StrStream.DataString;
+//    finally
+//      StrStream.Free;
+//    end;
+//  finally
+//    BinStream.Free
+//  end;
+//end;
+
+end.

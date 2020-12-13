@@ -1,0 +1,46 @@
+unit UObjectFile;
+
+interface
+
+uses
+  Classes, SysUtils;
+
+type
+  TSaver = class(TComponent)
+  private
+    FSaveObject: TPersistent;
+  published
+    property SaveObject: TPersistent read FSaveObject write FSaveObject;
+  end;
+
+implementation
+
+procedure SaveObject(AStream: TStream; AObject: TPersistent);
+var
+  ASaver: TSaver;
+begin
+  Assert(Assigned(AObject));
+  ASaver := TSaver.Create(nil);
+  try
+    ASaver.SaveObject := AObject;
+    AStream.WriteComponent(ASaver);
+  finally
+    ASaver.Free;
+  end;
+end;
+
+procedure LoadObject(AStream: TStream; AObject: TPersistent);
+var
+  ASaver: TSaver;
+begin
+  Assert(Assigned(AObject));
+  ASaver := TSaver.Create(nil);
+  try
+    ASaver.SaveObject := AObject;
+    AStream.ReadComponent(ASaver);
+  finally
+    ASaver.Free;
+  end;
+end;
+
+end.

@@ -1,0 +1,84 @@
+unit UObjectFile;
+
+interface
+
+uses
+  Androidapi.JNI.JavaTypes,
+  Androidapi.JNIBridge;
+
+//References:
+//  http://docs.oracle.com/javase/6/docs/platform/serialization/spec/serialTOC.html
+//  http://stackoverflow.com/questions/5837698#5837739
+
+type
+  TSerialiser = class
+  public
+    class function Serialise(const Obj: JObject): TJavaArray<Byte>;
+    class function Deserialise(Bytes: TJavaArray<Byte>): JObject;
+  end;
+
+implementation
+
+// Delphi XE5 and later (all Android-supporting versions) offer an
+// import for java.io.ByteArrayOutputStream and java.io.ByteArrayInputStream
+// in Androidapi.JNI.JavaTypes.pas.
+// However neither java.io.ObjectInputStream nor java.io.ObjectOutputStream
+// are imported in any version up to the current (at time of writing) version,
+// Delphi 10.1 Berlin, so we import the bits we need here.
+
+type
+// ===== Forward declarations =====
+
+  JObjectInputStream = interface;//java.io.ObjectInputStream
+  JObjectOutputStream = interface;//java.io.ObjectOutputStream
+
+// ===== Interface declarations =====
+
+  JObjectInputStreamClass = interface(JInputStreamClass)
+    ['{443A1BEF-E21F-4012-A28B-4D7735136BD3}']
+    {class} function init(input: JInputStream): JObjectInputStream; cdecl;//Deprecated
+  end;
+
+  [JavaSignature('java/io/ObjectInputStream')]
+  JObjectInputStream = interface(JInputStream)
+    ['{C1360ABB-AF58-4607-B43E-C1E1652E8FC2}']
+    function readObject: JObject; cdecl;//Deprecated
+  end;
+  TJObjectInputStream = class(TJavaGenericImport<JObjectInputStreamClass, JObjectInputStream>) end;
+
+  JObjectOutputStreamClass = interface(JOutputStreamClass)
+    ['{D43CF30C-1E94-4D2E-A473-91EE54E41F07}']
+    {class} function init(output: JOutputStream): JObjectOutputStream; cdecl;//Deprecated
+  end;
+
+  [JavaSignature('java/io/ObjectOutputStream')]
+  JObjectOutputStream = interface(JOutputStream)
+    ['{F4E441F8-B3D0-4463-A052-880F6644FB42}']
+    procedure writeObject(&object: JObject); cdecl;
+  end;
+  TJObjectOutputStream = class(TJavaGenericImport<JObjectOutputStreamClass, JObjectOutputStream>) end;
+
+{ TSerialiser }
+
+class function TSerialiser.Serialise(const Obj: JObject): TJavaArray<Byte>;
+var
+  b: JByteArrayOutputStream;
+  o: JObjectOutputStream;
+begin
+  b := TJByteArrayOutputStream.Create;
+  o := TJObjectOutputStream.JavaClass.init(b);
+  o.writeObject(Obj);
+  Result := b.toByteArray;
+end;
+
+class function TSerialiser.Deserialise(Bytes: TJavaArray<Byte>): JObject;
+var
+  b: JByteArrayInputStream;
+  o: JObjectInputStream;
+begin
+  b := TJByteArrayInputStream.JavaClass.Init(Bytes);
+  o := TJObjectInputStream.JavaClass.init(b);
+  Result := o.readObject;
+end;
+
+end.

@@ -1,0 +1,18 @@
+unit UObjectFile;
+
+interface
+
+uses
+  Classes, SysUtils;
+
+type
+  TSaver = class(TComponent)
+  private
+    FSaveObject: TPersistent;
+  published
+    property SaveObject: TPersistent read FSaveObject write FSaveObject;
+  end;
+
+implementation
+
+end.

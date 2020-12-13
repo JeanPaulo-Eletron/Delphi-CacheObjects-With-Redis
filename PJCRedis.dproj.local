@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/03/25 09:15:27.000.408,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/25 09:30:50.000.897,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/03/25 09:31:57.000.440,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/09/22 20:20:51.000.861,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/12/11 21:14:02.000.260,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/12/11 21:15:06.000.193,C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\main.pas</Transaction>
+    <Transaction>2020/12/11 21:15:06.000.193,C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\main.dfm</Transaction>
+    <Transaction>2020/12/11 21:19:48.000.656,C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\PJCRedis.dproj</Transaction>
+    <Transaction>2020/12/13 01:09:17.579,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\Unit1.pas</Transaction>
+    <Transaction>2020/12/13 01:09:43.807,C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\UObjectFile.pas=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\Unit1.pas</Transaction>
+    <Transaction>2020/12/13 01:11:29.382,=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\Unit1.pas</Transaction>
+    <Transaction>2020/12/13 01:11:40.841,C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\UClientes.pas=C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

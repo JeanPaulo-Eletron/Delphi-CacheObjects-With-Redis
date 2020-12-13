@@ -1,0 +1,20 @@
+unit UClientes;
+
+interface
+
+uses Classes, SysUtils, UObjectFile;
+
+type
+  TClientes = class(TPersistent)
+  private
+    FFileName: String;
+  public
+    [JSONMarshalled(True)] [JSonName('NomeField')]
+    nome : string;
+  end;
+
+implementation
+
+{ TClientes }
+
+end.

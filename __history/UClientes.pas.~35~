@@ -1,0 +1,23 @@
+unit UClientes;
+
+interface
+
+uses Classes, SysUtils, UObjectFile;
+
+type
+// All fields of records are serialized, no control here.
+  TRec = record
+    Nome: String;
+  end;
+
+  TClientes = class
+  public
+    [JSONMarshalled(True)] [JSonName('NomeField')]
+    Cliente1 : TRec;
+  end;
+
+implementation
+
+{ TClientes }
+
+end.
