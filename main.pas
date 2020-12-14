@@ -65,7 +65,7 @@ begin
   Cliente.Nome  := 'Jean Paulo Ath. De Mei';
   Cliente.Idade := '21 Anos, Quase 22';
   Cliente.SaveFromRedis(RedisClient);
-  Cliente1       := TClientes.Create('Cliente1');
+  Cliente1       := TClientes.Create(RedisClient);
   Cliente1.Nome  := 'Thiago da Silva Ribeiro';
   Cliente1.Idade := 'seila';
   Cliente1.SaveFromRedis(RedisClient);

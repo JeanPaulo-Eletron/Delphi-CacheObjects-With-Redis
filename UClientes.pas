@@ -11,7 +11,9 @@ type
     FIdade: String;
     FNomeVariavel: String;
   public
-    constructor Create(NomeVariavel: String);
+    constructor Create(NomeVariavel: String);overload;
+    //Caso queira cadastrar um  cliente novo, ou seja que não existe ainda no Redis, já salvando ele no redis, sem precisar se preocupar com o nome
+    constructor Create(RedisClient: IRedisClient);overload;
     property NomeVariavel:  String read FNomeVariavel  write FNomeVariavel;
     property Nome:  String read FNome  write FNome;
     property Idade: String read FIdade write FIdade;
@@ -26,6 +28,16 @@ implementation
 constructor TClientes.Create(NomeVariavel: String);
 begin
   Self.NomeVariavel := NomeVariavel;
+end;
+
+//Caso queira cadastrar um  cliente novo, ou seja que não existe ainda no Redis, já salvando ele no redis, sem precisar se preocupar com o nome
+constructor TClientes.Create(RedisClient: IRedisClient);
+begin
+  if not RedisClient.EXISTS('QtdeOfClientes')
+    then RedisClient.&SET('QtdeOfClientes','1')
+    else RedisClient.&SET('QtdeOfClientes', IntToStr(StrToInt(RedisClient.GET('QtdeOfClientes'))+1) );
+  Create('Cliente'+RedisClient.GET('QtdeOfClientes'));
+  SaveFromRedis(RedisClient);
 end;
 
 function TClientes.SaveFromRedis(RedisClient: IRedisClient): Boolean;
