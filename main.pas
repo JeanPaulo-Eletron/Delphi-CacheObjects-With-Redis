@@ -5,8 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Redis.Client, Redis.NetLib.INDY, Redis.Commons,
-  Vcl.StdCtrls, Vcl.Buttons,  REST.Json.Types, // without this unit we get warning: W1025 Unsupported language feature: 'custom attribute'
-  REST.Json, ShellAPI;
+  Vcl.StdCtrls, Vcl.Buttons,  REST.Json.Types, REST.Json, ShellAPI;
 
 type
   TForm1 = class(TForm)
