@@ -3,7 +3,6 @@ program PJCRedis;
 uses
   Vcl.Forms,
   main in 'main.pas' {Form1},
-  UObjectFile in 'UObjectFile.pas',
   UClientes in 'UClientes.pas';
 
 {$R *.res}

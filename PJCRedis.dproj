@@ -102,7 +102,6 @@
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UObjectFile.pas"/>
         <DCCReference Include="UClientes.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

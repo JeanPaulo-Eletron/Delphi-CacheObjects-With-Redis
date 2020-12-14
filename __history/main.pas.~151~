@@ -1,0 +1,88 @@
+unit main;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Redis.Client, Redis.NetLib.INDY, Redis.Commons,
+  Vcl.StdCtrls, Vcl.Buttons,  REST.Json.Types, // without this unit we get warning: W1025 Unsupported language feature: 'custom attribute'
+  REST.Json, ShellAPI;
+
+type
+  TForm1 = class(TForm)
+    BitBtn1: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    RedisClient: IRedisClient;
+    procedure CarregarClienteDeTeste;
+    procedure CarregarRedis;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+uses UClientes, UObjectFile;
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+var Cliente : TClientes;
+    Clientes : System.TArray<TClientes>;
+begin
+  Clientes := Cliente.LoadFromRedis(RedisClient);
+  for Cliente in Clientes do begin
+    ShowMessage(Cliente.Nome);
+    ShowMessage(Cliente.Idade);  
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  CarregarRedis;
+  CarregarClienteDeTeste;
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+  ShellExecute(Application.Handle,
+               PChar('open'),
+               PChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis-server.exe'),
+               PChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis.conf'),
+               nil,
+               SW_HIDE);
+end;
+
+procedure TForm1.CarregarClienteDeTeste;
+//var Cliente, Cliente1 : TClientes;
+begin
+//  Cliente       := TClientes.Create('Cliente');
+//  Cliente.Nome  := 'Jean Paulo Ath. De Mei';
+//  Cliente.Idade := '21 Anos, Quase 22';
+//  Cliente.SaveFromRedis(RedisClient);
+//  Cliente1       := TClientes.Create('Cliente1');
+//  Cliente1.Nome  := 'Thiago da Silva Ribeiro';
+//  Cliente1.Idade := 'seila';
+//  Cliente1.SaveFromRedis(RedisClient);
+end;
+
+procedure TForm1.CarregarRedis;
+var Cliente : TClientes;
+begin
+  ShellExecute(Application.Handle,
+               PChar('open'),
+               PChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis-server.exe'),
+               // Esse parametro serve para pegar a configuração que salva o cache em disco de tempos em tempos
+               PChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis.conf'),
+               nil,
+               SW_HIDE);
+  RedisClient := NewRedisClient;
+end;
+
+end.
