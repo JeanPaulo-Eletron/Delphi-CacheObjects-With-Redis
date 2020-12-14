@@ -18,7 +18,7 @@ type
     property Idade: String read FIdade write FIdade;
     function SaveFromRedis(RedisClient: IRedisClient):Boolean;
     function LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes; Overload;
-    function LoadFromRedis(RedisClient: IRedisClient):  System.TArray<TClientes>;  Overload;
+    function LoadFromRedis(RedisClient: IRedisClient): Array of TClientes;  Overload;
   end;
 
 implementation
@@ -49,9 +49,9 @@ begin
   End;
 end;
 
-function TClientes.LoadFromRedis(RedisClient: IRedisClient): System.TArray<TClientes>;
+function TClientes.LoadFromRedis(RedisClient: IRedisClient): Array of TClientes;
 begin
-  Result := [Self];
+
 end;
 
 end.

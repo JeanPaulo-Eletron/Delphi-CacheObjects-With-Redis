@@ -33,12 +33,13 @@ implementation
 uses UClientes, UObjectFile;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
-var Cliente1 : TClientes;
+var Cliente : TClientes;
     JSon:      String;
 begin
   JSon := RedisClient.GET('Clientes');
-  Cliente1 := TJson.JsonToObject<TClientes>(Json);
-  ShowMessage(Cliente1.Nome);
+  Cliente := TJson.JsonToObject<TClientes>(Json);
+  ShowMessage(Cliente.Nome);
+  ShowMessage(Cliente.Idade);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -61,18 +62,19 @@ end;
 procedure TForm1.CarregarClienteDeTeste;
 var Cliente : TClientes;
 begin
-  Cliente      := TClientes.Create;
-  Cliente.Nome := 'Jean Paulo Ath. De Mei';
-  RedisClient.&SET('Clientes', TJson.ObjectToJsonString(Cliente));
+  Cliente       := TClientes.Create('Cliente');
+  Cliente.Nome  := 'Jean Paulo Ath. De Mei';
+  Cliente.Idade := '21 Anos, Quase 22';
+  Cliente.SaveFromRedis(RedisClient);
 end;
 
 procedure TForm1.CarregarRedis;
 var Cliente : TClientes;
 begin
-  //WinExec(PAnsiChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis-server.exe'{redis.conf}), SW_Hide);
   ShellExecute(Application.Handle,
                PChar('open'),
                PChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis-server.exe'),
+               // Esse parametro serve para pegar a configuração que salva o cache em disco de tempos em tempos
                PChar('C:\Users\jeanp\Documents\Embarcadero\Studio\Projects\Redis\Redis\64bit\redis.conf'),
                nil,
                SW_HIDE);

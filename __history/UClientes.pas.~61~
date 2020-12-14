@@ -51,7 +51,7 @@ end;
 
 function TClientes.LoadFromRedis(RedisClient: IRedisClient): System.TArray<TClientes>;
 begin
-  Result := [Self];
+
 end;
 
 end.
