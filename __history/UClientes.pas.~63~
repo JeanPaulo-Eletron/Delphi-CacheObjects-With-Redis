@@ -17,7 +17,8 @@ type
     property Nome:  String read FNome  write FNome;
     property Idade: String read FIdade write FIdade;
     function SaveFromRedis(RedisClient: IRedisClient):Boolean;
-    function LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): Boolean;
+    function LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes; Overload;
+    function LoadFromRedis(RedisClient: IRedisClient):  System.TArray<TClientes>;  Overload;
   end;
 
 implementation
@@ -28,26 +29,36 @@ begin
 end;
 
 function TClientes.SaveFromRedis(RedisClient: IRedisClient): Boolean;
+var
+  ListaDeClientes: String;
 begin
   Result := False;
   Try
     RedisClient.&SET(NomeVariavel, TJson.ObjectToJsonString(Self));
+    if RedisClient.EXISTS('ListOfClientes')
+      then ListaDeClientes := StringReplace(RedisClient.GET('ListOfClientes'), NomeVariavel+';', '', []);
+    ListaDeClientes := ListaDeClientes + ';';
+    RedisClient.&SET('ListOfClientes', ListaDeClientes);
     Result := True;
   Finally
   End;
 end;
 
-function TClientes.LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): Boolean;
+function TClientes.LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes;
 var
   Json: String;
 begin
-  Result := False;
   Try
     Json := RedisClient.GET(NomeVariavel);
-    Self := TJson.JsonToObject<TClientes>(JSon) as TClientes;
-    Result := True;
+    Result := TJson.JsonToObject<TClientes>(JSon);
   Finally
   End;
+end;
+
+function TClientes.LoadFromRedis(RedisClient: IRedisClient): System.TArray<TClientes>;
+begin
+  Result := [Self];
+    
 end;
 
 end.

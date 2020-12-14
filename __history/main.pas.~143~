@@ -34,16 +34,16 @@ uses UClientes, UObjectFile;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
 var Cliente : TClientes;
-    Clientes : Array of TClientes;
+    Clientes : System.TArray<TClientes>;
 begin
-  Cliente := Cliente.LoadFromRedis('Cliente', RedisClient);
+  Cliente  := Cliente.LoadFromRedis('Cliente', RedisClient);
+  Clientes := Cliente.LoadFromRedis(RedisClient);
   ShowMessage(Cliente.Nome);
   ShowMessage(Cliente.Idade);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-
   CarregarRedis;
   CarregarClienteDeTeste;
 end;

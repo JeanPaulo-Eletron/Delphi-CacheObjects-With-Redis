@@ -34,6 +34,8 @@ uses UClientes, UObjectFile;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
 var Cliente : TClientes;
+    Clientes : Array of TClientes;
+    teste: System.TArray<TClientes>;
 begin
   Cliente := Cliente.LoadFromRedis('Cliente', RedisClient);
   ShowMessage(Cliente.Nome);

@@ -34,17 +34,17 @@ uses UClientes, UObjectFile;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
 var Cliente : TClientes;
-    Clientes : Array of TClientes;
-    teste: System.Array<TClientes>;
+    Clientes : System.TArray<TClientes>;
 begin
-  Cliente := Cliente.LoadFromRedis('Cliente', RedisClient);
-  ShowMessage(Cliente.Nome);
-  ShowMessage(Cliente.Idade);
+  Clientes := Cliente.LoadFromRedis(RedisClient);
+  for Cliente in Clientes do begin
+    ShowMessage(Cliente.Nome);
+    ShowMessage(Cliente.Idade);  
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-
   CarregarRedis;
   CarregarClienteDeTeste;
 end;

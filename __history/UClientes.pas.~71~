@@ -18,7 +18,7 @@ type
     function SaveFromRedis(RedisClient: IRedisClient):Boolean;
     function LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes; Overload;
     function LoadFromRedis(RedisClient: IRedisClient):  System.TArray<TClientes>;  Overload;
-    function DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): Boolean;
+    function DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes;
   end;
 
 implementation
@@ -67,7 +67,7 @@ begin
   end;
 end;
 
-function TClientes.DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): Boolean;
+function TClientes.DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes;
 var
   ListaDeClientes: String;
 begin

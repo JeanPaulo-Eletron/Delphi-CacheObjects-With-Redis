@@ -10,7 +10,10 @@ type
     FNome:  String;
     FIdade: String;
     FNomeVariavel: String;
+    function DiscardRedis(NomeVariavel: String;
+      RedisClient: IRedisClient): TClientes;
   public
+    //[JSONMarshalled(True)] [JSonName('NomeField')]
     constructor Create(NomeVariavel: String);
     property NomeVariavel:  String read FNomeVariavel  write FNomeVariavel;
     property Nome:  String read FNome  write FNome;
@@ -18,7 +21,6 @@ type
     function SaveFromRedis(RedisClient: IRedisClient):Boolean;
     function LoadFromRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes; Overload;
     function LoadFromRedis(RedisClient: IRedisClient):  System.TArray<TClientes>;  Overload;
-    function DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): Boolean;
   end;
 
 implementation
@@ -67,7 +69,7 @@ begin
   end;
 end;
 
-function TClientes.DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): Boolean;
+function TClientes.DiscardRedis(NomeVariavel: String; RedisClient: IRedisClient): TClientes;
 var
   ListaDeClientes: String;
 begin
